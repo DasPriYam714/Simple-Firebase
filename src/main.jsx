@@ -9,6 +9,8 @@ import {
 import Main from './layout/main';
 import Home from './components/Home';
 import GoogleLogin from './components/GoogleLogin';
+import Login from './components/login/Login';
+import Register from './components/register/Register';
 
 
 
@@ -24,7 +26,16 @@ const router = createBrowserRouter([
       {
         path: "/googlelogin",
         element: <GoogleLogin></GoogleLogin>
+      },
+      {
+        path: "/login",
+        element: <Login></Login>
+      },
+      {
+        path: "/register",
+        element: <Register></Register>
       }
+      
     ]
 
   },
