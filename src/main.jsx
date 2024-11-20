@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import Main from './layout/main';
 import Home from './components/Home';
+import GoogleLogin from './components/GoogleLogin';
 
 
 
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>
+      },
+      {
+        path: "/googlelogin",
+        element: <GoogleLogin></GoogleLogin>
       }
     ]
 
