@@ -13,6 +13,11 @@ const Register = () => {
         const password = e.target.password.value;
         console.log(email, password);
 
+        if (password.length<6){
+            setErrorMassageCopy('Password should be at least 6 characters');
+            return;
+        }
+
         // Reset error
         setSuccess('');
 
