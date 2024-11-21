@@ -71,6 +71,8 @@ const GoogleLogin = () => {
                     <img src={user.photoURL} alt="" />
                 </div>
             }
+
+            
         </div>
     );
 };
