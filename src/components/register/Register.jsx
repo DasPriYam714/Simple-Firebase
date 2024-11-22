@@ -5,7 +5,8 @@ import { createUserWithEmailAndPassword,getAuth } from 'firebase/auth';
 const Register = () => {
 
     const [errorMassageCopy, setErrorMassageCopy] = useState('');
-    const [success, setSuccess] = useState('')
+    const [success, setSuccess] = useState('');
+    const [showPass, setShowPass] = useState(false);
     
     const handleRegister= e =>{
         e.preventDefault();
@@ -17,9 +18,15 @@ const Register = () => {
             setErrorMassageCopy('Password should be at least 6 characters');
             return;
         }
+         else if(!/(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]/.test(password)){
+            setErrorMassageCopy('Password should be at least 6 characters and at least one special characters');
+            return;
+
+        }
 
         // Reset error
         setSuccess('');
+        setErrorMassageCopy('');
 
         const auth= getAuth(app);
 
@@ -42,7 +49,13 @@ const Register = () => {
             <h2>Register your account</h2>
             <form onSubmit={handleRegister} className='flex flex-col '>
                 <input className='w-1/2 px-4 py-2 border-4 border-e-red-50 mb-4 rounded-md ' type="email" name='email' placeholder='type your email' required/>
-                <input className='w-1/2 px-4 py-2 border-4 border-e-red-50 mb-4 rounded-md' type="password" name='password' placeholder='type your password' required/>
+                <input 
+                className='w-1/2 px-4 py-2 border-4 border-e-red-50 mb-4 rounded-md' 
+                type={showPass? "text":"password" }
+                name='password' 
+                placeholder='type your password' 
+                required/>
+                <span onClick={()=>setShowPass(!showPass)}>Show</span>
                 <button className='bg-gray-400 w-1/2 px-4 py-2 rounded-md'>Submit</button>
             </form>
             {
