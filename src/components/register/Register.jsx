@@ -16,7 +16,8 @@ const Register = () => {
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
-        console.log(email, password);
+        const condition= e.target.terms.checked;
+        console.log(email, password, condition);
 
         if (password.length<6){
             setErrorMassageCopy('Password should be at least 6 characters');
@@ -26,6 +27,10 @@ const Register = () => {
             setErrorMassageCopy('Password should be at least 6 characters and at least one special characters');
             return;
 
+        }
+        else if(!condition){
+            setErrorMassageCopy('Please accept the terms and conditions.');
+            return;
         }
 
         // Reset error
@@ -67,7 +72,14 @@ const Register = () => {
                         showPass ? <FaEyeSlash className='text-xl' />:<FaEye className='text-xl' /> 
                     }
                 </span>
+
+
                 </div>
+                <div className='flex mb-5'>
+                    <input type="checkbox" name='terms' />
+                    <p className='ml-2'>I have read and agree to the Terms</p>
+                </div>
+                
                
                 <button className='bg-gray-400  px-4 py-2 rounded-md'>Submit</button>
             </form>
