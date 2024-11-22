@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import app from '../../firebase/firebase.init';
 import { createUserWithEmailAndPassword,getAuth } from 'firebase/auth';
+import { FaEyeSlash } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
+
+
 
 const Register = () => {
 
@@ -46,16 +50,25 @@ const Register = () => {
     return (
         <div className='flex flex-col justify-center text-center'>
             <div>
-            <h2>Register your account</h2>
+            <h2 className='text-2xl text-cyan-950'>Register your account</h2>
             <form onSubmit={handleRegister} className='flex flex-col '>
                 <input className='w-1/2 px-4 py-2 border-4 border-e-red-50 mb-4 rounded-md ' type="email" name='email' placeholder='type your email' required/>
+                <div className='flex'>
                 <input 
                 className='w-1/2 px-4 py-2 border-4 border-e-red-50 mb-4 rounded-md' 
                 type={showPass? "text":"password" }
                 name='password' 
                 placeholder='type your password' 
-                required/>
-                <span onClick={()=>setShowPass(!showPass)}>Show</span>
+                required
+                
+                />
+                 <span onClick={()=>setShowPass(!showPass)}>
+                {
+                        showPass ? <FaEyeSlash className='text-xl' />:<FaEye className='text-xl' /> 
+                    }
+                </span>
+                </div>
+               
                 <button className='bg-gray-400 w-1/2 px-4 py-2 rounded-md'>Submit</button>
             </form>
             {
