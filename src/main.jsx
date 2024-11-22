@@ -11,6 +11,7 @@ import Home from './components/Home';
 import GoogleLogin from './components/GoogleLogin';
 import Login from './components/login/Login';
 import Register from './components/register/Register';
+import ForgotPassword from './components/forgotPassword/ForgotPassword';
 
 
 
@@ -34,6 +35,11 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>
+      },
+      {
+        path: "/forgotPassword",
+        element: <ForgotPassword></ForgotPassword>
+
       }
       
     ]
