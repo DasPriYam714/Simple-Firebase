@@ -49,27 +49,27 @@ const Register = () => {
     
     return (
         <div className='flex flex-col justify-center text-center'>
-            <div>
+            <div className=''>
             <h2 className='text-2xl text-cyan-950'>Register your account</h2>
-            <form onSubmit={handleRegister} className='flex flex-col '>
-                <input className='w-1/2 px-4 py-2 border-4 border-e-red-50 mb-4 rounded-md ' type="email" name='email' placeholder='type your email' required/>
-                <div className='flex'>
+            <form onSubmit={handleRegister} className='flex flex-col w-1/2 justify-center'>
+                <input className=' px-4 py-2 border-4 border-e-red-50 mb-4 rounded-md ' type="email" name='email' placeholder='type your email' required/>
+                <div className='relative'>
                 <input 
-                className='w-1/2 px-4 py-2 border-4 border-e-red-50 mb-4 rounded-md' 
+                className=' w-full px-4 py-2 border-4 border-e-red-50 mb-4 rounded-md' 
                 type={showPass? "text":"password" }
                 name='password' 
                 placeholder='type your password' 
                 required
                 
                 />
-                 <span onClick={()=>setShowPass(!showPass)}>
+                 <span className='absolute top-3 right-4' onClick={()=>setShowPass(!showPass)}>
                 {
                         showPass ? <FaEyeSlash className='text-xl' />:<FaEye className='text-xl' /> 
                     }
                 </span>
                 </div>
                
-                <button className='bg-gray-400 w-1/2 px-4 py-2 rounded-md'>Submit</button>
+                <button className='bg-gray-400  px-4 py-2 rounded-md'>Submit</button>
             </form>
             {
                 errorMassageCopy && <p className=' text-red-600'>{errorMassageCopy}</p>
