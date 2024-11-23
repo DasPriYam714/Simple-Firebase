@@ -4,6 +4,7 @@ import { FaEye } from "react-icons/fa";
 
 
 const ForgotPassword = () => {
+    
     return (
         <div>
             <h2 className='text-2xl text-cyan-950'>Register your account</h2>

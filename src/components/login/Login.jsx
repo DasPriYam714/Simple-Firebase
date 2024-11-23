@@ -1,12 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
+    const [loginError, setLoginError] = useState('');
+    const [successLogin, setSuccessLogin] = useState('');
+
+
     const handleHeroLogin=e=>{
         e.preventDefault();
         const email= e.target.email.value;
         const password= e.target.password.value;
         console.log(email,password)
+    }
+
+    if(!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/ .test(email)){
+        setLoginError('Please enter a valid email');
+
     }
     return (
         <div className="hero bg-base-200 min-h-screen">
