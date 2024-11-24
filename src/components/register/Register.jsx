@@ -3,6 +3,7 @@ import app from '../../firebase/firebase.init';
 import { createUserWithEmailAndPassword,getAuth } from 'firebase/auth';
 import { FaEyeSlash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 
 
 
@@ -54,11 +55,11 @@ const Register = () => {
     
     return (
         <div className='flex flex-col justify-center text-center'>
-            <div className=''>
+            <div className='justify-center'>
             <h2 className='text-2xl text-cyan-950'>Register your account</h2>
-            <form onSubmit={handleRegister} className='flex flex-col w-1/2 justify-center'>
-                <input className=' px-4 py-2 border-4 border-e-red-50 mb-4 rounded-md ' type="email" name='email' placeholder='type your email' required/>
-                <div className='relative'>
+            <form onSubmit={handleRegister} className='flex flex-col  items-center'>
+                <input className=' px-4 py-2 border-4 w-1/2 border-e-red-50 mb-4 rounded-md ' type="email" name='email' placeholder='type your email' required/>
+                <div className='relative w-1/2'>
                 <input 
                 className=' w-full px-4 py-2 border-4 border-e-red-50 mb-4 rounded-md' 
                 type={showPass? "text":"password" }
@@ -81,7 +82,9 @@ const Register = () => {
                 </div>
                 
                
-                <button className='bg-gray-400  px-4 py-2 rounded-md'>Submit</button>
+                <button className='bg-gray-400  px-4 py-2 rounded-md w-1/2'>Submit</button>
+                
+          
             </form>
             {
                 errorMassageCopy && <p className=' text-red-600'>{errorMassageCopy}</p>
@@ -89,9 +92,15 @@ const Register = () => {
              {
                 success && <p className=' text-green-600'>{success}</p>
             }
-          
+             <div>
+                <p className='mt-3'>Already have an account? <Link to={'/login'}>Login</Link></p>
+            </div>
+
+
 
             </div>
+           
+           
             
             
         </div>

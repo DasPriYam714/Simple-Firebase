@@ -60,12 +60,10 @@ const Login = () => {
           </label>
           <input type="password" placeholder="password" name="password" className="input input-bordered" required />
           <label className="label">
-            <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+           <Link to={'/forgotPassword'} className="label-text-alt link link-hover">Forgot password?</Link> 
           </label>
         </div>
-        <div>
-            <Link to={"/forgotPassword"}>Forgot your password?</Link>
-        </div>
+        
         <div className="form-control mt-6">
           <button className="btn btn-primary">Login</button>
         </div>
