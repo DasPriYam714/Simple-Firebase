@@ -31,7 +31,14 @@ const Login = () => {
         .then(result=>{
             const user=result.user;
             console.log(user);
-            setSuccessLogin('logged in successfully');
+            if(result.user.emailVerified){
+                setSuccessLogin('logged in successfully');
+
+            }
+            else{
+                alert('please verify your email address.')
+            }
+            
         })
         .catch( error=>{
             console.error(error);
@@ -104,7 +111,7 @@ const Login = () => {
         loginError && <p className=' text-red-600'>{loginError}</p>
       }
       {
-        successLogin && <p className=' text-red-600'>{successLogin} </p>
+        successLogin && <p className=' text-green-700'>{successLogin} </p>
       }
       </form>
       <div>

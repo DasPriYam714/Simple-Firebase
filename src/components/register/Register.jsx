@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import app from '../../firebase/firebase.init';
-import { createUserWithEmailAndPassword,getAuth } from 'firebase/auth';
+import { createUserWithEmailAndPassword,getAuth, sendEmailVerification, updateProfile } from 'firebase/auth';
 import { FaEyeSlash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import { Link } from 'react-router-dom';
@@ -15,10 +15,11 @@ const Register = () => {
     
     const handleRegister= e =>{
         e.preventDefault();
+        const name=e.target.name.value;
         const email = e.target.email.value;
         const password = e.target.password.value;
         const condition= e.target.terms.checked;
-        console.log(email, password, condition);
+        console.log(name,email, password, condition);
 
         if (password.length<6){
             setErrorMassageCopy('Password should be at least 6 characters');
@@ -42,8 +43,24 @@ const Register = () => {
 
     createUserWithEmailAndPassword(auth,email,password)
     .then(result=>{
-        const user=result.user;
+        // const user=result.user;
+        console.log(result.user)
         setSuccess('Registered successfully')
+
+        // update profile
+        updateProfile(result.user,{
+            displayName: name,
+            
+        })
+        .then(()=> console.log('Profile updated successfully'))
+        .catch()
+
+        // send verification email
+        sendEmailVerification(result.user)
+        .then( ()=>{
+            alert('please check your email and verify your account.')
+        })
+
     })
     .catch(error=>{
         console.error(error);
@@ -58,6 +75,7 @@ const Register = () => {
             <div className='justify-center'>
             <h2 className='text-2xl text-cyan-950'>Register your account</h2>
             <form onSubmit={handleRegister} className='flex flex-col  items-center'>
+            <input className=' px-4 py-2 border-4 w-1/2 border-e-red-50 mb-4 rounded-md ' type="text" name='name' placeholder='type your name' required/>
                 <input className=' px-4 py-2 border-4 w-1/2 border-e-red-50 mb-4 rounded-md ' type="email" name='email' placeholder='type your email' required/>
                 <div className='relative w-1/2'>
                 <input 
