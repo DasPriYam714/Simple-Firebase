@@ -93,7 +93,7 @@ const Register = () => {
                 success && <p className=' text-green-600'>{success}</p>
             }
              <div>
-                <p className='mt-3'>Already have an account? <Link to={'/login'}>Login</Link></p>
+                <p className='mt-3'>Already have an account? <Link to={'/login'} className='text-blue-800'>Login</Link></p>
             </div>
 
 

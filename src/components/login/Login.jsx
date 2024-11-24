@@ -74,6 +74,9 @@ const Login = () => {
         successLogin && <p className=' text-red-600'>{successLogin} </p>
       }
       </form>
+      <div>
+                <p className='text-sm text-center'>Are you new here? <Link to={'/register'} >Register</Link></p>
+            </div>
      
     </div>
   </div>
