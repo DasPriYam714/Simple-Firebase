@@ -1,5 +1,7 @@
+import { signInWithEmailAndPassword, getAuth} from 'firebase/auth';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import app from '../../firebase/firebase.init';
 
 const Login = () => {
     const [loginError, setLoginError] = useState('');
@@ -11,12 +13,29 @@ const Login = () => {
         const email= e.target.email.value;
         const password= e.target.password.value;
         console.log(email,password)
+
+        if(!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)){
+            setLoginError('Please enter a valid email');
+    
+        }
+        setLoginError('');
+        setSuccessLogin('');
+
+        const auth= getAuth(app);
+
+        signInWithEmailAndPassword(auth, email, password)
+        .then(result=>{
+            const user=result.user;
+            console.log(user);
+            setSuccessLogin('logged in successfully');
+        })
+        .catch( error=>{
+            console.error(error);
+            setLoginError(error.message);
+        })
     }
 
-    if(!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/ .test(email)){
-        setLoginError('Please enter a valid email');
-
-    }
+   
     return (
         <div className="hero bg-base-200 min-h-screen">
   <div className="hero-content flex-col lg:flex-row-reverse">
@@ -50,7 +69,14 @@ const Login = () => {
         <div className="form-control mt-6">
           <button className="btn btn-primary">Login</button>
         </div>
+        {
+        loginError && <p className=' text-red-600'>{loginError}</p>
+      }
+      {
+        successLogin && <p className=' text-red-600'>{successLogin} </p>
+      }
       </form>
+     
     </div>
   </div>
 </div>

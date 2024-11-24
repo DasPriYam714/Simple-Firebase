@@ -33,7 +33,7 @@ const Register = () => {
             return;
         }
 
-        // Reset error
+        // Reset error and Success 
         setSuccess('');
         setErrorMassageCopy('');
 
