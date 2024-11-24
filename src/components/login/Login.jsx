@@ -18,6 +18,8 @@ const Login = () => {
             setLoginError('Please enter a valid email');
     
         }
+
+        // Reset error and Success 
         setLoginError('');
         setSuccessLogin('');
 
