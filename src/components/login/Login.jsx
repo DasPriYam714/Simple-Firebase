@@ -1,11 +1,13 @@
-import { signInWithEmailAndPassword, getAuth} from 'firebase/auth';
-import React, { useState } from 'react';
+import { signInWithEmailAndPassword, getAuth, sendPasswordResetEmail} from 'firebase/auth';
+import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import app from '../../firebase/firebase.init';
+
 
 const Login = () => {
     const [loginError, setLoginError] = useState('');
     const [successLogin, setSuccessLogin] = useState('');
+    const emailRef =useRef(null);
 
 
     const handleHeroLogin=e=>{
@@ -14,10 +16,10 @@ const Login = () => {
         const password= e.target.password.value;
         console.log(email,password)
 
-        if(!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)){
-            setLoginError('Please enter a valid email');
+        // if(!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)){
+        //     setLoginError('Please enter a valid email');
     
-        }
+        // }
 
         // Reset error and Success 
         setLoginError('');
@@ -37,6 +39,34 @@ const Login = () => {
         })
     }
 
+    const handleForgotPass =()=>{
+        const auth= getAuth(app);
+        // e.preventDefault();
+        const email = emailRef.current.value;
+
+        if(!email){
+            console.log('please provide a valid email', emailRef.current.value)
+            return;
+
+        }
+        else if(!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)){
+            setLoginError('Please enter a valid email');
+            return;
+    
+        }
+
+        // send validation email
+       sendPasswordResetEmail(auth, email)
+       .then(()=>{
+        alert('please check your email.')
+       })
+       .catch(error =>{
+        console.log(error);
+       })
+        
+
+    }
+
    
     return (
         <div className="hero bg-base-200 min-h-screen">
@@ -54,7 +84,7 @@ const Login = () => {
           <label className="label">
             <span className="label-text">Email</span>
           </label>
-          <input type="email" placeholder="email" name="email" className="input input-bordered" required />
+          <input type="email" placeholder="email" name="email" className="input input-bordered" ref={emailRef} required />
         </div>
         <div className="form-control">
           <label className="label">
@@ -62,7 +92,8 @@ const Login = () => {
           </label>
           <input type="password" placeholder="password" name="password" className="input input-bordered" required />
           <label className="label">
-           <Link to={'/forgotPassword'} className="label-text-alt link link-hover">Forgot password?</Link> 
+           {/* <Link onClick={handleForgotPass} className="label-text-alt link link-hover">Forgot password?</Link>  */}
+           <p onClick={handleForgotPass} className="label-text-alt link link-hover">Forgot password?</p>
           </label>
         </div>
         
